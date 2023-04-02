@@ -1,0 +1,112 @@
+	1.Criacao de venv
+
+python -m venv "venv"
+
+
+	2.Install django
+
+python -m pip install Django
+
+
+	3.Criacao de projeto
+
+django-admin startproject sistemaHospital .
+
+
+	4.Criando app
+
+python manage.py startapp hospital
+
+
+	5.Registrar app na settgins
+
+'hospital',
+
+
+	6.Criando database
+
+python manage.py migrate
+(sqlite3)
+
+
+	7.Rodando projeto
+
+python manage.py runserver
+
+
+	8.Adicionar as url
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('hospital/', include('hospital.urls'))
+]
+
+
+	9.Importar o HttpResponse criação do html
+
+from django.http import HttpResponse
+
+index.html
+
+	10.Criar a funcao
+
+<body>
+        (h1)lista de pacientes(/h1)
+
+    <ul>
+        {% for pessoa in pessoas %}
+        <li> {{pessoa.id}} - {{pessoa.nome}}
+            <a href="{% url 'editar' pessoa.id %}">Editar</a>
+            <a href="{% url 'delete' pessoa.id %}">Deletar</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form action="{% url 'salvar' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" />
+        <button type="submit">enviar</button>
+    </form>
+
+
+
+	11.Importar a funcao para urls
+
+Ex: from fabprojeto.views import "...."
+
+
+	12.Criacão da pasta template (Lembrar de criar dentro da pasta do app)
+
+OBS:Criar uma pasta dentro da template com nome do app
+criar um arquivo html dentro da pasta com nome do app
+
+
+	13.Usar template para página
+
+ex: funcão (resquest)
+return render(request, template_name='fabprojeto/index.html')
+
+
+	14.Criar model
+
+class "nome da classe"(models.Model);
+	a field que você quiser
+
+
+	15.Criacao da migrations
+
+py .\manage.py makemigrations
+depois aplica com: py .\manage.py migrate
+
+
+	16.Adicionar a admin
+
+from .models import "nome da class"
+
+
+	17.Registrar com admin
+
+admin.site.register(nome da class)
